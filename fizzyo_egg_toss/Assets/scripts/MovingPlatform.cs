@@ -5,8 +5,8 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour {
     //public GameObject Platform;
     private float moveSpeed = 2f;
-    public float positiveMoveSpeed;
-    public float negativeMoveSpeed;
+    private float positiveMoveSpeed;
+    private float negativeMoveSpeed;
     //public Transform currentPoint;
     //public Transform[] points;
     //public int pointSelection;

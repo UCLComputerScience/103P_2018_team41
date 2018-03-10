@@ -73,10 +73,13 @@ public class OnCollision : MonoBehaviour
 
             if (pointOfContact == new Vector2(0, -1))
             {
+                if (lastCollidedPlatform != transform && lastCollidedPlatform != null)
+                {
+                    ScoreControl.currentScore += 1;
+                }
                 lastCollidedPlatform = transform;
                 enterTop = true;
-                ScoreControl.currentScore += 1;
-                
+
                 if (transform.position.y > mCamera.position.y)
                 {   
                     collideObject = transform;

@@ -28,12 +28,11 @@ public class EggHealth : MonoBehaviour
             if (HealthControl.lives != 0)
             {
                 HealthControl.deductLife();
-
-
                 if (HealthControl.lives > 0)
                 {
                     transform.position = new Vector3(OnCollision.lastCollidedPlatform.position.x, OnCollision.lastCollidedPlatform.position.y + 1.5f, OnCollision.lastCollidedPlatform.position.z);
                     OnCollision.lastCollidedPlatform.gameObject.GetComponent<EdgeCollider2D>().enabled = true;
+                    transform.parent = OnCollision.lastCollidedPlatform.gameObject.transform;
                 }
             }
         }

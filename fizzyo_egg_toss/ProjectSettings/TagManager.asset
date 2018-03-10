@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Life
+  - DarkCloud
   layers:
   - Default
   - TransparentFX

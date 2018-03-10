@@ -13,13 +13,9 @@ public class GameOverMenu : MonoBehaviour {
 		if (gameIsOver == true)
         {
             gameOverMenuUI.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.Escape)) //restart game
-            {
-                gameIsOver = false;
-                gameOverMenuUI.SetActive(false);
-                MenuButtonControl.restartGame();
-            }
+        } else
+        {
+            gameOverMenuUI.SetActive(false);
         }
 	}
 }
