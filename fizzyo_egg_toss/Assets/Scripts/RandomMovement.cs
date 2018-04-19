@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RandomMovement : MonoBehaviour {
 
@@ -16,6 +14,7 @@ public class RandomMovement : MonoBehaviour {
 
     void Update()
     {
+        // Dark clouds random movement within the camera view
         transform.position += direction * SPEED * Time.deltaTime;
         float randY = 1f;
         float randX = 1f;

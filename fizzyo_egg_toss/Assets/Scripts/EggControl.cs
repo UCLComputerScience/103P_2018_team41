@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Fizzyo;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class EggControl : MonoBehaviour {
-
-    public float jumpForce = 500f;
+public class EggControl : MonoBehaviour
+{
+    public static float jumpForce = 13f;
     private bool jump = false;
     private bool grounded = false;
-    //private Transform camera;
     private Rigidbody2D rb2d;
     private Vector2 pointOfContact;
     FizzyoDevice fd;
@@ -20,30 +16,18 @@ public class EggControl : MonoBehaviour {
         LevelGenerator.LevelGenerate();
         rb2d = GetComponent<Rigidbody2D>();
         fd = new FizzyoDevice();
-        //camera = GameObject.FindWithTag("MainCamera").transform;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        //Debug.Log("Grounded: " + grounded + " | Jump: " + jump);
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        
-        if ((fd.ButtonDown() || Input.GetKeyDown(KeyCode.W)) && grounded)
+        // Since we have no button, we use up arrow key to simulate
+        if ((fd.ButtonDown() || Input.GetKeyDown(KeyCode.UpArrow)) && grounded && !Input.GetMouseButtonDown(0))
         {
             jump = true;
-            grounded = false;
-            //grounded = false;
 
-            //rb.AddForce(Vector2.up * jumpHeight);
-            //    allowJump = false;
-            //    Vector2 velocity = rb.velocity;
-            //    velocity.y = jumpHeight;
-            //    rb.velocity = velocity;
-            //}
-            //Debug.Log("test");
-            //movement = Input.GetAxis("Vertical") * jumpHeight;
-            //allowJump = false;
+            grounded = false;
+            SoundControl.playJumpSound();
         }
     }
 
@@ -51,78 +35,49 @@ public class EggControl : MonoBehaviour {
     {
         if (jump)
         {
-            //rb2d.AddForce(new Vector2(0f, jumpForce));
             Vector2 velocity = rb2d.velocity;
             velocity.y = jumpForce;
             rb2d.velocity = velocity;
             jump = false;
         }
-
     }
-
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        grounded = true;
-    //    }
-    //}
-
-
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
-        { //If the tag of the collider we touched is "enemy", then...
+        {
+            //Grab the normal of the contact point we touched
+            pointOfContact = collision.contacts[0].normal; 
 
-
-            pointOfContact = collision.contacts[0].normal; //Grab the normal of the contact point we touched
-
-            //Detect which side of the collider we touched
-            //if (pointOfContact == new Vector2(-1, 0))
-            //{
-            //    Debug.Log("We touched the left side of the enemy!");
-            //}
-
-            //if (pointOfContact == new Vector2(1, 0))
-            //{
-            //    Debug.Log("We touched the right side of the enemy!");
-            //}
-
-            //if (pointOfContact == new Vector2(0, -1))
-            //{
-            //    Debug.Log("We touched the enemy's bottom!");
-            //}
-
+            // If collide from the top
             if (pointOfContact == new Vector2(0, 1))
             {
                 grounded = true;
+
+                // Make platform the egg's parent so that they will move together
                 transform.parent = collision.transform;
-                //Debug.Log("We touched the top of the enemy!");
-                //if (collision.gameObject.transform.position.y > camera.position.y)
-                //{
-                //    Debug.Log("Change!");
-                //}
+
+                // Makes the egg in the middle of the platform
+                transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y + 0.625f, -0.1f); 
             }
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
+        // On exit, remove as egg's parent
         transform.parent = null;
-        //if (collision.gameObject.tag == "Ground")
-        //{
-        //    pointOfContact = collision.contacts[0].normal;
-
-        //    if (pointOfContact == new Vector2(0, 1))
-        //    {
-        
-        //    }
-        //}
+        transform.position = new Vector3(transform.position.x, transform.position.y, -0.6f);
     }
 
-    //void OnCollisionStay(Collision collision)
-    //{
-    //    isFalling = false;
-    //    Debug.Log("test");
-    //}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+            SoundControl.playCoinSound();
+            CoinControl.currentCoinCount += 1;
+        }
+    }
 }
