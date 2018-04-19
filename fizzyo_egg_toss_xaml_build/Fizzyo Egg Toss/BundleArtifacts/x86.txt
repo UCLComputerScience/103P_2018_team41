@@ -1,0 +1,6 @@
+MainPackage=C:\Users\Isaac\Documents\UCL\COMP103P Software Development\fizzyo_egg_toss_xaml_build\Fizzyo Egg Toss\bin\x86\Master\Fizzyo Egg Toss_1.0.0.0_x86_Master.appx
+SymbolPackage=C:\Users\Isaac\Documents\UCL\COMP103P Software Development\fizzyo_egg_toss_xaml_build\Fizzyo Egg Toss\AppPackages\Fizzyo Egg Toss_1.0.0.0_Master_Test\Fizzyo Egg Toss_1.0.0.0_x86_Master.appxsym
+ResourcePack=C:\Users\Isaac\Documents\UCL\COMP103P Software Development\fizzyo_egg_toss_xaml_build\Fizzyo Egg Toss\bin\x86\Master\Fizzyo Egg Toss_1.0.0.0_scale-100.appx
+ResourcePack=C:\Users\Isaac\Documents\UCL\COMP103P Software Development\fizzyo_egg_toss_xaml_build\Fizzyo Egg Toss\bin\x86\Master\Fizzyo Egg Toss_1.0.0.0_scale-125.appx
+ResourcePack=C:\Users\Isaac\Documents\UCL\COMP103P Software Development\fizzyo_egg_toss_xaml_build\Fizzyo Egg Toss\bin\x86\Master\Fizzyo Egg Toss_1.0.0.0_scale-150.appx
+ResourcePack=C:\Users\Isaac\Documents\UCL\COMP103P Software Development\fizzyo_egg_toss_xaml_build\Fizzyo Egg Toss\bin\x86\Master\Fizzyo Egg Toss_1.0.0.0_scale-400.appx
